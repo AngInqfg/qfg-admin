@@ -78,7 +78,7 @@ async function getUserCallback(t: string) {
     let timer = setTimeout(() => {
         ElMessage({ message: '欢迎回来！', type: 'success', grouping: true })
         loadingEl.value.close()
-        window.location.reload()
+        window.location.href = window.location.origin
         clearTimeout(timer)
     }, 200);
 }
