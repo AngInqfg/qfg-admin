@@ -12,9 +12,8 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
   const currentEnv: any = { ...ENV[mode], ...BASE }
   const newProxy = PROXY(ENV[mode])
   console.log(currentEnv);
-  const base = currentEnv?.name === 'DEV' ? '/' : '/dist/'
   return {
-    base: base,
+    base: '/',
     plugins: [
       vue(), vueJsx(),
       AutoImport({
