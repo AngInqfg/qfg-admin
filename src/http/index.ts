@@ -2,7 +2,8 @@ import { request } from "./request"
 import { ENV, BASE } from '/public/env'
 const env = import.meta.env
 const envName = env.MODE
-const base = envName === 'dev' ? BASE['default'] : ENV['dev'].defaultUrl
+// const base = envName === 'dev' ? BASE['default'] : ENV['dev'].defaultUrl
+const base = BASE['default']
 
 export const login = async (e): Promise<{ code: number, data: string, message: string }> => {
     return await request<{ code: number, data: string, message: string }>({ url: base + '/login', data: e })
