@@ -12,6 +12,8 @@ const routes: RouteRecordRaw[] = [
             rc('/admin', false),
             rc('/nuxt', false),
             rc('/xcx', false),
+            rc('/menu', false),
+            rc('/messageList', true),
         ],
         redirect: '/home'
     },
@@ -26,6 +28,10 @@ router.beforeEach(async (_to: any, _from: any, _next: any) => {
     const store = useStore()
     if (!!store.token) {
         if (_to.path === '/login') {
+            _next(_from)
+            return
+        }
+        if(!store.menu.some((n) => n.path === _to.path)) {
             _next(_from)
             return
         }

@@ -32,7 +32,10 @@
         "src/*"
       ],
       "/": [
-        ""
+        "/"
+      ],
+      "/public/env": [
+        "./public/env.ts"
       ]
     },
     "noImplicitAny": false,
@@ -40,6 +43,7 @@
   "include": [
     "vite.config.ts",
     "src/**/*.ts",
+    "src/**/*.d.ts",
     "src/**/*.tsx",
     "src/**/*.vue"
   ]

@@ -1,5 +1,6 @@
-import AXIOS from 'axios'
+import AXIOS, { AxiosRequestConfig } from 'axios'
 import { useStore } from '@/stores';
+import { ElMessage } from 'element-plus'
 const axiosInstance = AXIOS.create({
     baseURL: '/',
     timeout: 1000 * 60 * 5
@@ -26,13 +27,22 @@ axiosInstance.interceptors.response.use(
         return Promise.reject(error);
     }
 );
-const request = async <T>(options = {}) => {
-    return axiosInstance({
-        method: 'POST',
-        ...options
-    }).then((response) => response as T).catch((error) => {
+const request = async <T>(options: AxiosRequestConfig = {}): Promise<requestType<T>> => {
+    try {
+        const response = await axiosInstance({
+            method: 'POST',
+            ...options
+        }) as unknown as requestType<T>;
+        if(response?.code === 9998) {
+            ElMessage({ type: 'danger', message: '登录已过期' })
+            sessionStorage.clear()
+            window.location.href = window.location.origin
+        }
+        return response;
+    } catch (error) {
+        // 你可以在这里处理或记录错误
         throw error;
-    });
+    }
 }
 const customCode = {
     OK: 0,

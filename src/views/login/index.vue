@@ -31,9 +31,9 @@ import { login } from '@/http'
 const store = useStore();
 const color = 'rgba(66,86,208,1)';
 const formRef = ref()
-const formData = ref({
-    username: 'qinfugui',
-    password: 'qinfugui'
+const formData = ref<loginParamType>({
+    username: '',
+    password: ''
 })
 const formRule = {
     username: [
@@ -72,7 +72,7 @@ function handleLoginClick() {
     })
 }
 
-async function getUserCallback(t: string) {
+async function getUserCallback(t: loginRequestType) {
     await store.getUser(t)
     await store.getMenu()
     let timer = setTimeout(() => {

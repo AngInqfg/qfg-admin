@@ -1,7 +1,7 @@
 <template>
     <el-container class="layout" ref="layoutRef">
         <el-aside class="layout_aside" :width="asideCollapse ? 'auto' : asideWidth">
-            <ASIDE :name="store.name" :user="store?.user" :collapse="asideCollapse" :menuList="store?.menu"
+            <ASIDE :name="store.name"  :key="store.asideRefresh" :user="store?.user" :collapse="asideCollapse" :menuList="store?.menu"
                 @handleMenuClick="handleMenuClick" @handleUserClick="handleUserClick" />
         </el-aside>
         <el-container class="layout_content">
@@ -55,7 +55,12 @@ watch(() => route, (_new: any) => {
 }, { deep: true, immediate: true })
 onMounted(() => {
     nextTick(() => {
+        let isFirstCall = true;
         const resize = new ResizeObserver(([first]) => {
+            if (isFirstCall) {
+                isFirstCall = false;
+                return;
+            }
             store.layoutConfig.asideCollapse = first?.contentRect?.width < 750
         })
         resize.observe(layoutRef.value.$el)
@@ -73,7 +78,7 @@ function breadRouteCallback(_new: any) {
 }
 function tabRouteCallback(_new: any) {
     const ci = flatMenu.value.find((m: menuType) => m.path === _new.path)
-    if (ci.path !== '/') {
+    if (ci && ci.path !== '/') {
         const hi = store.tabList.findIndex((n: any) => n.path === _new.path)
         const nCi = { ...ci, query: _new?.query || {} }
         if (hi !== -1) {

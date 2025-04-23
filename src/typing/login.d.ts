@@ -1,6 +1,9 @@
-interface loginTabType {
-    key: string,
-    val: any,
-    title: string,
-    callback: Function
+interface userType {
+    avatar: string,
+    phone: number | null,
+    token?: string,
+    username: string,
+    password?: string,
+    oldPassword?: string,
+    file?: any
 }

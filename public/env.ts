@@ -1,26 +1,28 @@
 export interface envType {
-    name: string,
-    defaultUrl: string,
-    wsUrl?: string
+    [key: string]: string,
 }
 // /posts
 export type envConfigType = Record<string, envType>
 const dev: envType = {
     name: 'DEV',
     defaultUrl: 'https://fc-mp-d2710277-d07d-462e-99b0-59276137c9a6.next.bspapp.com/qfg-admin',
+    blogUrl: 'https://fc-mp-d2710277-d07d-462e-99b0-59276137c9a6.next.bspapp.com/qfg-blog',
     // wsUrl: ''
 }
 const prev: envType = {
     name: 'PREV',
     defaultUrl: 'https://fc-mp-d2710277-d07d-462e-99b0-59276137c9a6.next.bspapp.com/qfg-admin',
+    blogUrl: 'https://fc-mp-d2710277-d07d-462e-99b0-59276137c9a6.next.bspapp.com/qfg-blog',
 
 }
 const prod: envType = {
     name: 'PROD',
     defaultUrl: 'https://fc-mp-d2710277-d07d-462e-99b0-59276137c9a6.next.bspapp.com/qfg-admin',
+    blogUrl: 'https://fc-mp-d2710277-d07d-462e-99b0-59276137c9a6.next.bspapp.com/qfg-blog',
 }
 const BASE: Record<string, string> = {
     default: '/qfg-admin',
+    blog: '/qfg-blog',
     //  ws: '/ws'
 }
 const ENV: envConfigType = { dev, prod, prev }
