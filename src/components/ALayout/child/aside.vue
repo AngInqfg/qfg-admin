@@ -1,6 +1,6 @@
 <template>
     <div class="logo" :style="{ justifyContent: collapse ? 'center' : 'flex-start' }">
-        <ICON name="logo" size="30px" color="#fff" />
+        <ICON name="q_icon" size="30px" color="#fff" />
         <span v-if="!collapse">{{ name }}</span>
     </div>
     <el-menu class="layout_menu" :default-active="route.path" :collapse="collapse" :collapse-transition="false">
